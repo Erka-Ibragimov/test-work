@@ -49,12 +49,13 @@
             }
         }
     },
-    "addPost": {
+    "addPost": { // send by form data
         "method": "POST",
         "url": "http://localhost:4000/api/add-post",
         "request": {
             "text": "qwe",
-            "userId": 3
+            "userId": 3,
+            "file": "send by form data" // не обязательное поле
         },
         "response": {
             "id": 2,
@@ -62,7 +63,8 @@
             "createdAt": "2023-05-21T19:17:44.094Z",
             "updatedAt": "2023-05-21T19:17:44.094Z",
             "name": "qwert",
-            "email": "zexwc@mail.ru"
+            "email": "zexwc@mail.ru",
+            "file": "file-28.05.2023-cli7bitgg0000acv12i1g1xin.jpeg"
         }
     },
     "removePost": {

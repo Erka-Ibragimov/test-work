@@ -7,7 +7,7 @@ type IPayload = {
 };
 
 export const generateTokens = (payload: IPayload) => {
-  const accessToken = sign(payload, "SECRET", { expiresIn: "500s" });
+  const accessToken = sign(payload, "SECRET", { expiresIn: "2000s" });
   const refreshToken = sign(payload, "SECRET2", { expiresIn: "30d" });
   return {
     accessToken,

@@ -58,12 +58,13 @@ export class Controller {
 
   async addPost(req: Request, res: Response, next: Function) {
     try {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        return next(new ApiError(404, "Не верный ввод данных"));
+      const { text, userId }: { text: string; userId: number } = req.body;
+      const fileName = req.file?.filename;
+
+      if (!userId || !text) {
+        throw new ApiError(404, "Не верные параметры");
       }
-      const { text, userId } = req.body;
-      const post = await new Service().addPost(text, userId);
+      const post = await new Service().addPost(text, userId, fileName);
       res.send(post);
     } catch (e) {
       next(e);
@@ -76,7 +77,6 @@ export class Controller {
       const post = await new Service().updatePost(text, id);
       res.send(post);
     } catch (e) {
-      console.log(e);
       next(e);
     }
   }

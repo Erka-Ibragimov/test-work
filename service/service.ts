@@ -89,11 +89,13 @@ export class Service {
     };
   }
 
-  async addPost(text: string, userId: number) {
+  async addPost(text: string, userId: number, file?: string) {
     const userRepository = AppDataSource.getRepository(User);
+
     const user = await userRepository.findOneBy({
       id: userId,
     });
+
     if (!user) {
       throw new ApiError(400, "Такого пользователя не существует");
     }
@@ -101,6 +103,7 @@ export class Service {
     const post = new Post();
     post.text = text;
     post.user = user;
+    post.file = file;
     const resultPost = await postRepository.save(post);
     return {
       id: resultPost.id,
@@ -109,6 +112,7 @@ export class Service {
       updatedAt: resultPost.updated_at,
       name: resultPost.user.name,
       email: resultPost.user.email,
+      file: resultPost.file,
     };
   }
 
